@@ -58,7 +58,7 @@ class TuiApplication {
             // Display the menu items. forEachIndexed() is similar to forEach but provides an index as the first
             // parameter of the lambda.
             menuItems.forEachIndexed { index, item ->
-                println("${index+1} ${item.title}")
+                println("$index: ${item.title}")
             }
             // Add a Quit option. This will have a number one greater than the last menu item.
             println("${menuItems.size}: Quit")
