@@ -2,7 +2,7 @@
 // An application class, to handle console input/output.
 // A TuiApplication object is created in main(), and its run() method called to enter the main loop of the application.
 // TODO make TuiApplication implement the interface.
-class TuiApplication {
+class TuiApplication : MenuItemHandler {
     val university = University()
 
     fun addStudent() {
@@ -40,18 +40,17 @@ class TuiApplication {
     }
 
     fun run() {
-        /*
+
         // Create an array of MenuItems. Each MenuItem has a title and a MenuItemHandler.
         // The MenuItemHandler should be the object which handles the event, i.e. the object containing the
         // onMenuItemSelected().
 
         // will handle the menu item selection event.  TODO add the MenuItemHandler in each case.
         val menuItems = arrayOf(
-            MenuItem("Add student", /*TODO*/),
-            MenuItem("Search for student by ID", /*TODO*/),
-            MenuItem("Search for students by name", /*TODO*/)
+            MenuItem("Add student", this ),
+            MenuItem("Search for student by ID",this ),
+            MenuItem("Search for students by name", this)
         )
-
 
         var running = true
         while (running) {
@@ -66,15 +65,21 @@ class TuiApplication {
             // Read the user input
             val input = readln().toInt()
             when (input) {
-                in menuItems.indices ->  menuItems[input].onMenuItemSelected() // if in the range of indices of menuItems, run the appropriate handler.
+                in menuItems.indices ->  menuItems[input].handler.onMenuItemSelected(input) // if in the range of indices of menuItems, run the appropriate handler.
                 menuItems.size -> running = false
                 else -> println("Error: invalid option")
             }
         }
 
-         */
+
     }
 
+    override fun onMenuItemSelected(choice: Int) {
+        println("Choice $choice selected.")
+        when(choice) {
+
+        }
+    }
     /* TODO:
        Provide the onMenuItemSelected() method needed to implement the interface in TUIApplication.
        Then, rewrite your code to create separate menu item handler objects for each menu item and modify your menuItems array to use them.
