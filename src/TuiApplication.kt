@@ -1,7 +1,6 @@
 // TuiApplication
 // An application class, to handle console input/output.
 // A TuiApplication object is created in main(), and its run() method called to enter the main loop of the application.
-// TODO make TuiApplication implement the interface.
 class TuiApplication : MenuItemHandler {
     val university = University()
 
@@ -41,48 +40,35 @@ class TuiApplication : MenuItemHandler {
 
     fun run() {
 
-        // Create an array of MenuItems. Each MenuItem has a title and a MenuItemHandler.
-        // The MenuItemHandler should be the object which handles the event, i.e. the object containing the
-        // onMenuItemSelected().
 
-        // will handle the menu item selection event.  TODO add the MenuItemHandler in each case.
-        val menuItems = arrayOf(
-            MenuItem("Add student", this ),
-            MenuItem("Search for student by ID",this ),
-            MenuItem("Search for students by name", this)
-        )
+
+        // Array of handlers for each menu item.
+        val menuHandlers = arrayOf (this, this, this)
 
         var running = true
         while (running) {
             // Display the menu items. forEachIndexed() is similar to forEach but provides an index as the first
             // parameter of the lambda.
-            menuItems.forEachIndexed { index, item ->
-                println("$index: ${item.title}")
-            }
-            // Add a Quit option. This will have a number one greater than the last menu item.
-            println("${menuItems.size}: Quit")
+            println("0: Add Student")
+            println("1: Search for Student By ID")
+            println("2: Search for Students By name")
+            println("3: Quit")
 
             // Read the user input
             val input = readln().toInt()
+
+            // If the input is 0-2, call the onMenuItemSelected() of the appropriate handler.
             when (input) {
-                in menuItems.indices ->  menuItems[input].handler.onMenuItemSelected(input) // if in the range of indices of menuItems, run the appropriate handler.
-                menuItems.size -> running = false
+                in 0..2 -> menuHandlers[input].onMenuItemSelected(input)
+                3 -> running = false
                 else -> println("Error: invalid option")
             }
         }
-
-
     }
 
+    // TODO complete.
     override fun onMenuItemSelected(choice: Int) {
         println("Choice $choice selected.")
-        when(choice) {
 
-        }
     }
-    /* TODO:
-       Provide the onMenuItemSelected() method needed to implement the interface in TUIApplication.
-       Then, rewrite your code to create separate menu item handler objects for each menu item and modify your menuItems array to use them.
-       Finally, modify your menu item handlers for each menu item to use lambdas (SAM conversions) instead.
-     */
 }
