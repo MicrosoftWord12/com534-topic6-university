@@ -1,7 +1,7 @@
 // TuiApplication
 // An application class, to handle console input/output.
 // A TuiApplication object is created in main(), and its run() method called to enter the main loop of the application.
-class TuiApplication : MenuItemHandler {
+class TuiApplication {
     val university = University()
 
     fun addStudent() {
@@ -39,36 +39,86 @@ class TuiApplication : MenuItemHandler {
     }
 
     fun run() {
-
-
-
         // Array of handlers for each menu item.
-        val menuHandlers = arrayOf (this, this, this)
-
+//        val menuHandlers = arrayOf (this, this, this)
         var running = true
+//        Anonymous classes
+        val optionOneHandler = object : MenuItemHandler {
+            override fun onMenuItemSelected() {
+                addStudent()
+            }
+        }
+
+        val optionTwoHandler = object : MenuItemHandler {
+            override fun onMenuItemSelected() {
+                searchForStudentById()
+            }
+        }
+
+        val optionThreeHandler = object : MenuItemHandler {
+            override fun onMenuItemSelected() {
+                searchForStudentsByCourse()
+            }
+        }
+
+        val optionFourQuitHandler = object: MenuItemHandler {
+            override fun onMenuItemSelected() {
+                running = false
+            }
+        }
+
+        val menuHandlers = arrayOf(optionOneHandler, optionTwoHandler, optionThreeHandler, optionFourQuitHandler)
+
+
         while (running) {
             // Display the menu items. forEachIndexed() is similar to forEach but provides an index as the first
             // parameter of the lambda.
-            println("0: Add Student")
-            println("1: Search for Student By ID")
-            println("2: Search for Students By name")
-            println("3: Quit")
+            var messages = listOf<String>("0: Add Student", "1: Search for Student By ID", "2: Search for Students by Course", "3: Quit")
+//            println("0: Add Student")
+//            println("1: Search for Student By ID")
+            // Searching for Students by named not inputted
+            // Changing to search for students by course
+            // println("2: Search for Students By name")
+//            println("2: Search for Students by Course")
+//            println("3: Quit")
+
+            messages.forEach { println(it) }
 
             // Read the user input
             val input = readln().toInt()
 
+            println("For Each Indexed")
+            messages.forEachIndexed { index, message -> {
+                println("$index: $message")
+                if (index == input) {
+                    println("Found Message and Index: $index")
+                    menuHandlers[input].onMenuItemSelected()
+                }
+            }}
+
+
+
+
+
+
+
+
             // If the input is 0-2, call the onMenuItemSelected() of the appropriate handler.
-            when (input) {
-                in 0..2 -> menuHandlers[input].onMenuItemSelected(input)
-                3 -> running = false
-                else -> println("Error: invalid option")
-            }
+//            when (input) {
+//                in 0..2 -> menuHandlers[input].onMenuItemSelected()
+//                3 -> running = false
+//                else -> println("Error: invalid option")
+//            }
         }
     }
 
-    // TODO complete.
-    override fun onMenuItemSelected(choice: Int) {
-        println("Choice $choice selected.")
-
-    }
+//    // TODO complete.
+//    override fun onMenuItemSelected() {
+//        when (choice) {
+//            0 -> this.addStudent()
+//            1 -> this.searchForStudentById()
+//            2 -> this.searchForStudentsByCourse()
+//        }
+//
+//    }
 }
