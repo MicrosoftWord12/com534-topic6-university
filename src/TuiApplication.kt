@@ -43,28 +43,44 @@ class TuiApplication {
 //        val menuHandlers = arrayOf (this, this, this)
         var running = true
 //        Anonymous classes
-        val optionOneHandler = object : MenuItemHandler {
-            override fun onMenuItemSelected() {
-                addStudent()
-            }
+//        val optionOneHandler = object : MenuItemHandler {
+//            override fun onMenuItemSelected() {
+//                addStudent()
+//            }
+//        }
+//
+//        val optionTwoHandler = object : MenuItemHandler {
+//            override fun onMenuItemSelected() {
+//                searchForStudentById()
+//            }
+//        }
+//
+//        val optionThreeHandler = object : MenuItemHandler {
+//            override fun onMenuItemSelected() {
+//                searchForStudentsByCourse()
+//            }
+//        }
+//
+//        val optionFourQuitHandler = object: MenuItemHandler {
+//            override fun onMenuItemSelected() {
+//                running = false
+//            }
+//        }
+
+        val optionOneHandler = MenuItemHandler {
+            addStudent()
         }
 
-        val optionTwoHandler = object : MenuItemHandler {
-            override fun onMenuItemSelected() {
-                searchForStudentById()
-            }
+        val optionTwoHandler = MenuItemHandler {
+            searchForStudentById()
         }
 
-        val optionThreeHandler = object : MenuItemHandler {
-            override fun onMenuItemSelected() {
-                searchForStudentsByCourse()
-            }
+        val optionThreeHandler = MenuItemHandler {
+            searchForStudentsByCourse()
         }
 
-        val optionFourQuitHandler = object: MenuItemHandler {
-            override fun onMenuItemSelected() {
-                running = false
-            }
+        val optionFourQuitHandler = MenuItemHandler {
+            running = false
         }
 
         val menuHandlers = arrayOf(optionOneHandler, optionTwoHandler, optionThreeHandler, optionFourQuitHandler)
@@ -73,7 +89,7 @@ class TuiApplication {
         while (running) {
             // Display the menu items. forEachIndexed() is similar to forEach but provides an index as the first
             // parameter of the lambda.
-            val messages = arrayOf<String>("0: Add Student", "1: Search for Student By ID", "2: Search for Students by Course", "3: Quit")
+            val messages = listOf<String>("0: Add Student", "1: Search for Student By ID", "2: Search for Students by Course", "3: Quit")
 //            println("0: Add Student")
 //            println("1: Search for Student By ID")
             // Searching for Students by named not inputted
@@ -82,24 +98,24 @@ class TuiApplication {
 //            println("2: Search for Students by Course")
 //            println("3: Quit")
 
-            messages.forEach { println(it) }
+           // messages.forEach { println(it) }
 
             // Read the user input
+            println("Enter an option:")
             val input = readln().toInt()
-//            messages.forEachIndexed { index, message -> {
-//                println("$index: $message")
-//                if (index == input) {
-//                    println("Found Message and Index: $index")
-//                    menuHandlers[input].onMenuItemSelected()
-//                }
-//            }}
 
-            if (input in messages.indices) {
-                menuHandlers[input].onMenuItemSelected()
-                if (input == 3) running = false
-            }else{
-                println("Invalid Choice")
+            messages.forEachIndexed { index, message ->
+                if (index == input) {
+                    menuHandlers[input].onMenuItemSelected()
+                }
             }
+
+//            if (input in messages.indices) {
+//                menuHandlers[input].onMenuItemSelected()
+//                if (input == 3) running = false
+//            }else{
+//                println("Invalid Choice")
+//            }
 
 
 
