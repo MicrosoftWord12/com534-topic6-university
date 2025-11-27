@@ -1,3 +1,5 @@
+import com.microsoft12.com534_topic_8_exercise.code.base.Student
+
 class University {
     val studentList = mutableListOf<Student>()
 

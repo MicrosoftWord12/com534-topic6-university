@@ -1,3 +1,5 @@
+import com.microsoft12.com534_topic_8_exercise.code.base.Student
+
 // TuiApplication
 // An application class, to handle console input/output.
 // A TuiApplication object is created in main(), and its run() method called to enter the main loop of the application.
@@ -39,33 +41,7 @@ class TuiApplication {
     }
 
     fun run() {
-        // Array of handlers for each menu item.
-//        val menuHandlers = arrayOf (this, this, this)
         var running = true
-//        Anonymous classes
-//        val optionOneHandler = object : MenuItemHandler {
-//            override fun onMenuItemSelected() {
-//                addStudent()
-//            }
-//        }
-//
-//        val optionTwoHandler = object : MenuItemHandler {
-//            override fun onMenuItemSelected() {
-//                searchForStudentById()
-//            }
-//        }
-//
-//        val optionThreeHandler = object : MenuItemHandler {
-//            override fun onMenuItemSelected() {
-//                searchForStudentsByCourse()
-//            }
-//        }
-//
-//        val optionFourQuitHandler = object: MenuItemHandler {
-//            override fun onMenuItemSelected() {
-//                running = false
-//            }
-//        }
 
         val optionOneHandler = MenuItemHandler {
             addStudent()
@@ -87,20 +63,15 @@ class TuiApplication {
 
 
         while (running) {
-            // Display the menu items. forEachIndexed() is similar to forEach but provides an index as the first
-            // parameter of the lambda.
-            val messages = listOf<String>("0: Add Student", "1: Search for Student By ID", "2: Search for Students by Course", "3: Quit")
-//            println("0: Add Student")
-//            println("1: Search for Student By ID")
-            // Searching for Students by named not inputted
-            // Changing to search for students by course
-            // println("2: Search for Students By name")
-//            println("2: Search for Students by Course")
-//            println("3: Quit")
+            val messages = listOf<String>(
+                "0: Add Student",
+                "1: Search for Student By ID",
+                "2: Search for Students by Course",
+                "3: Quit"
+            )
 
-           // messages.forEach { println(it) }
+            messages.forEach { println(it) }
 
-            // Read the user input
             println("Enter an option:")
             val input = readln().toInt()
 
@@ -110,36 +81,6 @@ class TuiApplication {
                 }
             }
 
-//            if (input in messages.indices) {
-//                menuHandlers[input].onMenuItemSelected()
-//                if (input == 3) running = false
-//            }else{
-//                println("Invalid Choice")
-//            }
-
-
-
-
-
-
-
-
-            // If the input is 0-2, call the onMenuItemSelected() of the appropriate handler.
-//            when (input) {
-//                in 0..2 -> menuHandlers[input].onMenuItemSelected()
-//                3 -> running = false
-//                else -> println("Error: invalid option")
-//            }
         }
     }
-
-//    // TODO complete.
-//    override fun onMenuItemSelected() {
-//        when (choice) {
-//            0 -> this.addStudent()
-//            1 -> this.searchForStudentById()
-//            2 -> this.searchForStudentsByCourse()
-//        }
-//
-//    }
 }
